@@ -2,11 +2,11 @@ package gameofwarte;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class DeckOfCards {
 
     private final ArrayList<Card> deck;
-    private int topCard = 0;
 
     public DeckOfCards() {
         deck = new ArrayList();
@@ -39,7 +39,14 @@ public class DeckOfCards {
         return cards;
     }
 
+    /**
+     * This method will 'shuffle' the deck of cards, 
+     * changing the current order of the cards
+     */
     public void shuffle() {
+        
+        Collections.shuffle(deck);
+        
         SecureRandom random = new SecureRandom();
         Card c;
         for (int i = 0; i < deck.size(); i++) {
@@ -48,16 +55,12 @@ public class DeckOfCards {
             deck.set(r, deck.get(i));
             deck.set(i, c);
         }
-
     }//
 
-    public Card deal() {
-
-        if (topCard < 52) {
-            return deck.get(topCard++);
-        } else {
-            return null;
-        }
+    public Card dealTopCard() {
+        
+        return deck.remove(0);
+        
     }//
 
 }//
